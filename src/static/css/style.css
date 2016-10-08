@@ -7,6 +7,11 @@ body {
   font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #404040;
   margin: 0px;
+  width: 100%;
+}
+
+.app-container {
+  width: 100%;
 }
 
 #background {
@@ -72,4 +77,9 @@ canvas {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
+}
+
+canvas {
+  width: inherit;
+  height: inherit;
 }

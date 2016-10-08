@@ -215,6 +215,8 @@ export default class Canvas extends Component {
       // Drawing a gridded canvas
       const sizeGrid = 40;  // 40x40
       const p = 0;         // padding
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
 
       const cw = this.canvas.width - p - 1;
       const ch = this.canvas.height - p - 1;
@@ -270,8 +272,8 @@ export default class Canvas extends Component {
     return (
       <div style = {canvasStyle}>
         <canvas ref = "sketchPad"
-                width = {this.props.width}
-                height = {this.props.height}>
+                width = '400'
+                height = '400'>
         </canvas>
         <div className="bottomright">
           <PlayerContent />
@@ -284,8 +286,6 @@ export default class Canvas extends Component {
 
 // Defining restriction
 Canvas.propTypes = {
-  width: React.PropTypes.number,
-  height: React.PropTypes.number,
   color: React.PropTypes.string,
   penSize: React.PropTypes.number,
   strokes: React.PropTypes.array,
@@ -294,8 +294,6 @@ Canvas.propTypes = {
 
 // Default values
 Canvas.defaultProps = {
-  width: window.innerWidth,
-  height: window.innerHeight,
   color: '#000',
   penSize: 2,
   strokes: [],
