@@ -4,7 +4,7 @@ import werewolves from '../data/werewolves';
 import Player from './Player';
 import LabelName from './LabelName';
 
-const style = {
+const paneStyle = {
   textAlign:"center",
   padding:"0px",
   height:"150px",
@@ -12,11 +12,17 @@ const style = {
   backgroundColor: "#fff"
 };
 
+const isResizable = {
+  x: false,
+  y: false,
+  xy: false
+};
+
 export default class PlayerContent extends Component{
   render() {
     const players = werewolves.map((werewolf) => {
       return (
-        <Pane width={150} height={150} style={style}>
+        <Pane width={150} height={150} style={paneStyle} isResizable={isResizable}>
           <Player />
           <LabelName name={werewolf.name}/>
         </Pane>

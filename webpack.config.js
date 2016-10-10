@@ -12,7 +12,6 @@ module.exports = {
       test: path.join(__dirname, 'src'),
       loader: ['babel-loader'],
       query: {
-        cacheDirectory: 'babel_cache',
         presets: ['react', 'es2015']
       }
     }]

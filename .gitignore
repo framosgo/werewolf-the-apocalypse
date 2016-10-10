@@ -38,3 +38,6 @@ jspm_packages
 
 # Babel_cache
 babel_cache
+
+# MAC please
+.DS_Store

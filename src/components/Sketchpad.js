@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PlayerContent from './PlayerContent'
 
-export default class Canvas extends Component {
+export default class Sketchpad extends Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +24,7 @@ export default class Canvas extends Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseOut = this.onMouseOut.bind(this);
+    // this.onMouseOut = this.onMouseOut.bind(this);
   }
 
   /*
@@ -176,38 +175,38 @@ export default class Canvas extends Component {
     }
     //console.log('onMouseUp!');
   }
-
+/*
   onMouseOut(event) {
     //console.log('onMouseOut!');
     this.onMouseUp(event);
   }
-
+*/
   // When one state has changed
   componentDidUpdate(prevProps, prevState) {
     if (this.state.sketching) {
         this.canvas.removeEventListener('mousedown', this.onMouseDown);
         this.canvas.addEventListener('mousemove', this.onMouseMove);
         this.canvas.addEventListener('mouseup', this.onMouseUp);
-        this.canvas.addEventListener('mouseout', this.onMouseOut);
+        // this.canvas.addEventListener('mouseout', this.onMouseOut);
     } else {
         this.canvas.addEventListener('mousedown', this.onMouseDown);
         this.canvas.removeEventListener('mousemove', this.onMouseMove);
         this.canvas.removeEventListener('mouseup', this.onMouseUp);
-        this.canvas.removeEventListener('mouseout', this.onMouseOut);
+        // this.canvas.removeEventListener('mouseout', this.onMouseOut);
     }
   }
 
-  // Make sure to remove the DOM listener when the component is unmounted
+  // Make sure to remove the DOM listeners when the component is unmounted
   componentWillUnmount() {
     this.canvas.removeEventListener('mousedown', this.onMouseDown);
     this.canvas.removeEventListener('mousemove', this.onMouseMove);
     this.canvas.removeEventListener('mouseup', this.onMouseUp);
-    this.canvas.removeEventListener('mouseout', this.onMouseOut);
+    // this.canvas.removeEventListener('mouseout', this.onMouseOut);
   }
 
   // The component has already mounted.
   componentDidMount() {
-    this.canvas = this.refs.sketchPad;
+    this.canvas = this.refs.sketchpad;
 
     if (this.canvas.getContext){
       this.context = this.canvas.getContext('2d');
@@ -215,8 +214,8 @@ export default class Canvas extends Component {
       // Drawing a gridded canvas
       const sizeGrid = 40;  // 40x40
       const p = 0;         // padding
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
+      this.canvas.width = window.innerWidth - 3;
+      this.canvas.height = window.innerHeight - 3;
 
       const cw = this.canvas.width - p - 1;
       const ch = this.canvas.height - p - 1;
@@ -256,36 +255,17 @@ export default class Canvas extends Component {
   }
 
   render() {
-    const canvasStyle = {
-      padding: 0,
-      display: 'block',
-      position: 'relative',
-      width: window.innerWidth,
-      height: window.innerHeight,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      border: '1px solid black'
-    }
-
     return (
-      <div style = {canvasStyle}>
-        <canvas ref = "sketchPad"
+        <canvas ref = "sketchpad"
                 width = '400'
                 height = '400'>
         </canvas>
-        <div className="bottomright">
-          <PlayerContent />
-        </div>
-
-      </div>
     );
   }
 }
 
 // Defining restriction
-Canvas.propTypes = {
+Sketchpad.propTypes = {
   color: React.PropTypes.string,
   penSize: React.PropTypes.number,
   strokes: React.PropTypes.array,
@@ -293,7 +273,7 @@ Canvas.propTypes = {
 };
 
 // Default values
-Canvas.defaultProps = {
+Sketchpad.defaultProps = {
   color: '#000',
   penSize: 2,
   strokes: [],
